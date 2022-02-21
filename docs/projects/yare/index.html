@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/main_template.dwt" codeOutsideHTMLIsLocked="false" -->
+<!-- DW6 -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Mathieu Mallet // YARE</title>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+<link href="../../mmallet.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../../favicon.ico">
+</head>
+<!-- The structure of this file is exactly the same as 2col_rightNav.html;
+     the only difference between the two is the stylesheet they use -->
+<body> 
+<div id="masthead"> 
+  <h1 id="siteName"><!-- InstanceBeginEditable name="Title" --><img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> Mathieu Mallet // YARE <!-- InstanceEndEditable --></h1>
+  <div id="globalNav"> 
+    <a href="../../index.html">Home</a> | <a href="../../aboutme.html">About Me</a> | <a href="../../knowledge.html">Knowledge</a> | <a href="../index.html">Projects</a> | <a href="../../links.html"></a><a href="../../workexperience.html">Work Experience</a> | <a href="../../resume/index.html">Resume</a> | <a href="../../links.html">Links</a> | <a href="../../contactme.html">Contact Me</a> 
+  </div> 
+</div> 
+<!-- end masthead --> 
+<!-- InstanceBeginEditable name="Body" -->
+<div id="content">
+  <h2 id="pageName">What is YARE ? </h2>
+  <div class="feature"><h3><a name="project"></a>Fourth Year Project </h3>
+      <p>Every student in computer engineering at the University of Ottawa is required to participate to a fourth year project to complete their degree. In the particular project class I attended, a computer design problem was to be solved in groups of six people. All of the proposed problems involved controlling a robot through an environment. YARE is the named that we gave to our robot. </p>
+  </div>
+  <div class="feature"> <a href="images/robot_large.jpg"><img src="images/robot_small.jpg" alt="YARE Robot" width="280" height="200" border="0"></a>
+      <p>The proposed projects were varied. One required a robot to follow a line on the ground and avoid obstacles. One required a robot to receive a path drawn on a PDA and move along said path. The project we chose had the following requirements:</p>
+      <p class="quote">&#8220;A mobile robot controlled by the Altera UP-2 board and/or the HC12 microprocessor will have to traverse a maze-based map in order to get from one end to the other of the maze. The main objective is to utilize remotely-embedded knowledge to solve the task at hand. IR sensors should be used to locate the openings within the maze, while a wireless communications scheme should be utilized to communicate with the knowledge base residing on a remote PC. A lookup table may be initially used, but as the task gets more complicated, a knowledge base should be utilized. The autonomous mobile robotic platform will acquire and interpret the data, in accordance with the remotely-embedded knowledge, and can update the knowledge base with newly learnt factoids. Contacts sensors should be used for handling accidental collision situations.&#8221;</p>
+	  <p>In other words, we had to design a robot that would find the shortest path in a maze. This involved having the robot autonomously traverse the maze, wirelessly communicate its recorded data to a base station, process that data to find the shortest path and finally control the robot through the shortest path. Our team consisted of the following people, all soon-to-be computer engineers: </p>
+	  <ul>
+	    <li><a href="http://dbergeron.ottawaengineers.ca">Dominic Bergeron</a></li>
+        <li>Georges Daoud</li>
+        <li>Bruno Daoust</li>
+        <li><a href="http://educhesneau.ottawaengineers.ca">Erick Duchesneau</a></li>
+        <li><a href="http://mmallet.ottawaengineers.ca">Mathieu Mallet</a></li>
+        <li><a href="http://mhurtubise.ottawaengineers.ca">Martin Hurtubise</a></li>
+	  </ul>
+    <h3><a name="initialdesign"></a>Initial Design </h3>
+    <p>Before starting work on the project, we needed to know what had to be done. The only things provided to us were the requirements and a plexiglas board on which were mounted and Altera UP-2 board, two servos with wheels and a Linx HP-II wireless prototype board. Though most of the components were already mounted, interfacing them to each other was left to us. Here were the tasks that we needed to perform:</p>
+  </div>
+  <div class="feature2"> <img src="images/Up1_bd_small.jpg" alt="Altera UP-2 Board" width="280" height="146" border="0">
+    <ul>
+      <li>Hardware
+        <ul>
+          <li>Mount and interface infra-red sensors</li>
+          <li>Interface servos with Altera board</li>
+          <li>Interface wireless prototype board with Altera board</li>
+        </ul>
+      </li>
+      <li>Software (Robot, in VHDL)
+        <ul>
+          <li>Controller for servos and infra-red sensors</li>
+          <li>Wireless receiver and transmitter controller </li>
+          <li>Control algorithm to allow robot to navigate the maze</li>
+        </ul>
+      </li>
+      <li>Software (PC, in Java)
+        <ul>
+          <li>Wireless receiver and transmitter interface</li>
+          <li>Data decoder</li>
+          <li>Data analyzer and shortest path algorithm</li>
+          <li>Graphical User Interface (GUI)</li>
+        </ul>
+      </li>
+    </ul>
+    <p>Software for the robot evidently needed to be written in VHDL as MaxPlus II was the tool available to write and load software onto the Altera board. We chose to write the software for the PC in Java as this is the language with which most people in our group had experience with. Tasks were then divided. Bruno started work on the algorithm that would be used to find the shortest path in the maze. Dominic started research on what would be needed to get the robot and the PC to communicate wirelessly. The rest of us started work on the hardware portion of the project.</p>
+    <h3><a name="firststeps"></a>First Steps </h3>
+    <p>The first task was to interface the servos to the Altera board. Though connection is relatively simple (only three wires per servo -- power, ground and data), we had difficulty getting the software on the robot to generate the required PWM signals. This was due to the fact that previously taken VHDL classes had been rather simplistic and had only touched the surface of what was needed. </p>
+  </div>
+  <div class="feature2"> <a href="images/vhdl_code.png"><img src="images/vhdl_code_small.jpg" alt="Sample of the VHDL code" width="280" height="200" border="0"></a>
+    <p>Interfacing the sensors proved to be much easier than interfacing the servos, partially because we were getting comfortable with the language but especially because free 'IP Core' were made available that would decode the signals generated by the sensors into semi-intellegible signals. Because the sensors have a 10cm 'dead zone' in which the signals cannot be trusted (e.g. the sensor would detect '90 cm' while the actual distance would be 5 cm), we decided to mount the sensors at the middle of the robot. However, the Altera board was located at the middle, we could not simply affix the sensors to the plexiglas. The solution to this proved to be elegant and efficient: we used legos to create a structure on which the sensors could be mounted.</p>
+  </div>
+  <div class="feature">  <a href="images/ai_core_flowchart.png"><img src="images/ai_core_flowchart_small.png" alt="Maze-navigation algorithm" width="280" height="200" border="0"></a>
+    <p>Once sensors and servos were working, getting the robot to navigate the maze was a trivial task. I wrote a state machine that would follow the algorithm illustrated on the picture to the left. The 'follow the right wall' algorithm would effectively guarantee that the robot would find the exit of the maze. Of course, there were problems: try as we might, we could not get the robot to go in a perfectly straight line. How could we insure that the robot does not diverge from the wall it's following? In the 'follow right' state, I added a few lines of code that would make the robot turn slightly if it came too close or went too far away from the wall. This simple compensation worked remarkably well once we found the proper distances to use in the algorithm. Those distances were found in a trial-and-error fashion. We now had a robot that could find the exit of a maze autonomously. </p>
+    <p>However, as we would soon find out, getting the robot to navigate the maze would be the easy part. </p>
+  </div>
+  <div class="feature2"><a href="images/linx_board.jpg"><img src="images/linx_board_small.jpg" alt="Linx HP Series II prototype board" width="280" height="180" border="0"></a>
+    <h3><a name="wirelesstroubles"></a>Wireless Troubles </h3>
+    <p>For this project, we were required to transmit maze data from the robot to the PC, have the PC analyze the data and then control the robot through the maze, following the shortest path. Though the first part only requires a one-way communication, the second requires the PC to be able to send commands to the robot while receiving feedback from it. We therefore needed to find out how to use the boards in full-duplex mode.</p>
+    <p>Included on the prototype boards is a set of DIP switches that can be used to set the incoming or outgoing signal channel. Reading through the board's documentation, we found that we could also use the jumpers to set the channel of the other signal (outgoing or incoming). Getting bi-directional communication was therefore a simple matter of choosing two channels to perform communications on.</p>
+  </div>
+  <div class="feature
+  "><a href="images/vhdl_symbols.png"><img src="images/vhdl_symbols_small.jpg" alt="Parts of YARE's VHDL modules" width="280" height="200" border="0"></a>
+    <p>One problem that we had using the wireless prototype boards was the heavy interference in the laboratory. There were about 11 other groups working in the same room, half of which used RF communications of some kind. For the longest time we couldn't get any signal to be received on the computer, until we can to the laboratory one week-end when no-one was there and discovered that interference was the cause of the problem. A second problem that we had was the reception of the data on the computer: to connect the RF board to the computer, a serial connection was used. However, on the robot the RF board was connected directly without using serial communications. Though we thought data received by the board would be encapsulated in serial packets before being sent to the computer, it was not. It took much debugging with oscilloscopes to realize this. We then wrote a VHDL module for the robot that would take the data that we wanted to send, encode it in 7-bits long serial packets and send it to the computer. Since the data was already in a serial format, the computer would then be able to read it from the serial port. For a complete description of the protocols used, refer to the project report at the end of this page.</p>
+  </div>  
+  <div class="feature2"><a href="images/yare_interface.png"><img src="images/yare_interface_small.jpg" alt="YARE's Java Interface" width="253" height="200" border="0"></a>
+    <h3><a name="javainterface" id="javainterface"></a>Java Interface </h3>
+    <p>While the robot's RF communication modules were being written, I started work on the program that would be used to receive and process the robot's data as well as control it once the shortest path had been computed. Initially the program consisted of a few simple controls as well as a few threads to receive and decode the serial data received. Since the computer needed to decode the data sent by the robot, work was done on both the robot's modules and the computer's software simultaneously. The biggest problem encountered was the manipulation of bit data in Java: while trying to read bytes from the serial interface, Java would always use signed variables and skew the data. Finally, we got the reception and decoding working as well as the error detection.</p>
+    <p>Once RF communications were working, we wrote a simple routine that would take the decoded data and plot it on screen. This allowed us to get a real-time representation of what the robot was seeing as it went through the maze. Though this was relatively simple, the much harder task of making sense of that data and finding the shortest path awaited us.</p>
+  </div>  
+  <div class="feature"><a href="images/eclipse_code.png"><img src="images/eclipse_code_small.jpg" alt="Java interface code in Eclipse" width="280" height="200" border="0"></a>
+    <p>As mentioned earlier, Bruno started to work on the maze-solving algorithm early in the project. Though the algorithm worked very well using theoretical  values (vertices of walls and points at which the robot could move), the data we had was merely a collection of recorded data points. Erick wrote a thread that would take my decoded data and extrude 'simple' walls from it. Getting the routine to work correctly, even with the occasional 'hiccups' from the sensors, required long weekends of work. An example of the wall-detection algorithm in action can be seen by comparing <a href="images/yare_interface.png">this picture</a>, which shows captured data points, with <a href="images/yare_interface2.png">this picture</a>, which shows the detected walls.. When we finally got the walls-detection algorithms as well as the shortest path algorithm working, we came to realize something: we could not tell the robot to follow the path that was found! </p>
+    <p>From the beginning, the robot was designed to simply follow walls. When following the shortest path, we sometimes required the robot to turn before the end of the wall was reached. How would the robot know when to turn? Erick came up with the solution: by having the program look at the next turn that the robot would have to perform, we could set the robot to always follow a wall and switch its following to the opposite wall when required. (See the video at the end of this document if this isn't clear)</p>
+    <h3><a name="presentation"></a>Presentation and Demo</h3>
+    <p>Once the project was completed, we needed to present it in front of our teachers and peers. Having worked on the project up till the last moment, time to prepare for the presentation was short. Nevertheless, we did two rehearsals and were ready. The presentation went quite smoothly, everyone knowing precisely which part they were to explain.</p>
+    <p>The demonstration is the part of the project that we were most nervous about. We only had one chance to demonstrate our robot's abilities: if some kind of malfunction was to occur, we would not be able to rectify it. Nevertheless, the demonstration went perfectly: the robot traversed the maze, the computer correctly processed the data and controlled the robot through the shortest path. You can see the video of the demonstration at the end of this document.</p>
+    <p>In conclusion, I think YARE was the most interesting project to which I took part. Though we had to put more work in this one class than we usually did in an entire semester, I believe that the experience that it gave us will help us for years to come.</p>
+    <h3><a name="additional" id="additional"></a>Additional Documents</h3>
+    <p>A few screen shots of the YARE interface: <a href="images/yare_interface.png">1</a> <a href="images/yare_interface2.png">2</a> <a href="images/yare_interface3.png">3</a> <a href="images/yare_interface4.png">4</a></p>
+    <p>The <a href="documents/CEG4392-FinalReport.pdf">final report</a> documenting the design of YARE</p>
+    <p>Power point <a href="documents/CEG4392-Presentation.ppt">slides</a> used during project presentation </p>
+    <p><a href="documents/msw1-1-xvid.avi">Video</a> of the demonstration (7.7 MB, <a href="http://www.divx-digest.com/software/xvid.html">xvid</a> codec required) </p>
+    <p>YARE Java client: <a href="documents/yare_client.zip">download</a> (1.3 MB) or <a href="webstart/yare.jnlp">launch</a> with Java Webstart (webstart version cannot open or save files however)</p>
+    <!--<p>VHDL and Java <a href="documents/protected/yare_source_code.zip">source code</a> (password protected - <a href="../../contactme.html">contact me</a> if you require access) </p>-->
+  </div>    
+  <div id="lastupdate">
+    Last updated on <!-- #BeginDate format:Am1 -->August 3, 2005<!-- #EndDate -->
+  </div> 
+</div>
+<!--end content -->
+<div id="navBar">
+  <div id="sectionLinks">
+    <ul>
+      <li><a href="#project">Fourth Year Project</a></li>
+      <li><a href="#initialdesign">Initial Design</a></li>
+      <li><a href="#firststeps">First Steps</a></li>
+      <li><a href="#wirelesstroubles">Wireless Troubles</a></li>
+      <li><a href="#javainterface">Java Interface</a></li>
+      <li><a href="#presentation">Presentation and Demo</a></li>
+      <li><a href="#additional">Additional Documents</a></li>
+    </ul>
+  </div>
+  <div class="relatedLinks">
+    <h3>Related Links</h3>
+    <ul>
+      <li><a href="http://www.site.uottawa.ca/%7Epetriu/teaching.htm">Dr. Petriu's Teachings</a></li>
+      <li><a href="http://www.altera.com/education/univ/kits/unv-kits.html">Altera UP-2 Kits</a></li>
+      <li><a href="http://www.linxtechnologies.com/index.php?section=products&category=eval_systems&subcategory=hp-3_mdev">Linx HP-II Master Kit</a></li>
+      <li><a href="http://www.eclipse.org/eclipse/">Eclipse Platform</a></li>
+      <li><a href="http://www.xvid.org/">xvid Codec Project Page</a></li>
+      <li><a href="http://java.sun.com/products/javawebstart/">Java Webstart</a></li>
+    </ul>
+  </div>
+</div>
+<!-- InstanceEndEditable -->
+<!--end navbar --> 
+<div id="siteInfo">  <img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> <a href="../../aboutme.html">About Me </a> | <a href="../../resume/index.html">Resume</a> | <a href="../../contactme.html">Contact Me </a>  | &copy;2004
+  Mathieu Mallet </div> 
+<br> 
+</body>
+<!-- InstanceEnd --></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/main_template.dwt" codeOutsideHTMLIsLocked="false" -->
+<!-- DW6 -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Mathieu Mallet // iRATE Radio</title>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+
+<!-- InstanceEndEditable -->
+<link href="../../mmallet.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../../favicon.ico">
+</head>
+<!-- The structure of this file is exactly the same as 2col_rightNav.html;
+     the only difference between the two is the stylesheet they use -->
+<body> 
+<div id="masthead"> 
+  <h1 id="siteName"><!-- InstanceBeginEditable name="Title" --><img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> Mathieu Mallet // iRATE Radio <!-- InstanceEndEditable --></h1>
+  <div id="globalNav"> 
+    <a href="../../index.html">Home</a> | <a href="../../aboutme.html">About Me</a> | <a href="../../knowledge.html">Knowledge</a> | <a href="../index.html">Projects</a> | <a href="../../links.html"></a><a href="../../workexperience.html">Work Experience</a> | <a href="../../resume/index.html">Resume</a> | <a href="../../links.html">Links</a> | <a href="../../contactme.html">Contact Me</a> 
+  </div> 
+</div> 
+<!-- end masthead --> 
+<!-- InstanceBeginEditable name="Body" -->
+<div id="content">
+  <h2 id="pageName">What is iRATE Radio ? </h2>
+  <div class="feature"> 
+      <h3><a name="overview"></a>Overview</h3>
+      <p>Usually, when it comes to music online, one has to chose between free music or legal music. What if someone were to provide music that is both free AND legal? Many artists, in hope of getting their music to a broader audience, put samples of their music on their web site where people can download them. The problem is then to find the music amongst the wide range of styles available on the web. </p>
+      <a href="images/irate_interface.png"><img src="images/irate_interface_small.jpg" alt="iRATE Radio interface under Linux" width="280" height="181" border="0"></a>
+	  <p>iRATE Radio is an open source project dedicated to facilitate music discovery. iRATE initially downloads a few songs off of artists' web sites. The user then rates the tracks on a scale of 0 to 10. Using those ratings as well as those of other people, iRATE is able to figure what kind of music you like and provide you with more music of the same style.</p>
+      <p>I first heard about iRATE Radio through one of Michael Crawford's Kuro5hin articles, &quot;<a href="http://www.kuro5hin.org/story/2003/9/5/05113/70314">Links to Tens of Thousands of Legal Music Downloads</a>&quot;. After using it for a few weeks, I posted a few suggestions on the iRATE development mailing list. However, the developers were rather busy at the moment and suggested that I implement those feature myself. After configuring my Eclipse platform to use the iRATE public CVS, I was ready to code. </p>
+  </div>
+  <div class="feature2">
+    <h3><a name="contributions"></a>Contributions</h3>
+    
+    <p><a href="images/unrated_notifier.png"><img src="images/unrated_notifier_small.jpg" alt="Unrated Track Notifier interface" width="280" height="200" border="0"></a>Unrated Track Notifier. For the iRATE system to work, users need to rate the tracks that they download. However, when one starts to have a lot of tracks in the play list, it becomes difficult to remember which tracks have been rated and which haven't without looking at the main window. This is where my Unrated Track Notifier plug-in comes into play: 30 seconds before the end of the song, an audio signal reminds the user that the current track is unrated. Required changes to the iRATE code for this plug-in involved code for the plug-in as well as additional code to extract the audio signal's .mp3 file from iRATE's .jar files.</p>
+    <p>French Translation. iRATE was available in english, spanish and german. Since I could speak french fluently, I volunteered to do the french translation of iRATE. This prove to be quite painless as the locales handling in Java is quite well designed. Under Linux, you can run iRATE using the french translation using the command '<em>export LC_ALL=fr_FR; irate-client;</em>'.</p>
+    <h3><a name="moreinfo"></a>More Information </h3>
+    <p>If you wish to try iRATE Radio for yourself, visit the project homepage at <a href="http://irate.sourceforge.net">http://irate.sourceforge.net</a>. If you have Java Webstart installed, it isn't required to actually install anything: the program can be run from the web site.</p>
+    <p>The entire code of iRATE is available through the <a href="http://cvs.sourceforge.net/viewcvs.py/irate/irate/">iRATE Radio CVS</a>. </p>
+  </div>
+  <div id="lastupdate">
+    Last updated on <!-- #BeginDate format:Am1 -->January 28, 2005<!-- #EndDate -->
+  </div> 
+</div>
+<!--end content -->
+<div id="navBar">
+  <div id="sectionLinks">
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#contributions">Contributions</a></li>
+      <li><a href="#moreinfo">More Information </a></li>
+    </ul>
+  </div>
+  <div class="relatedLinks">
+    <h3>Related Links</h3>
+    <ul>
+      <li><a href="http://irate.sourceforge.net/">iRATE Radio Project Page </a></li>
+      <li><a href="http://www.eclipse.org/eclipse/">Eclipse Platform</a></li>
+      <li><a href="http://java.sun.com/products/javawebstart/">Java Webstart </a></li>
+    </ul>
+  </div>
+</div>
+<!-- InstanceEndEditable -->
+<!--end navbar --> 
+<div id="siteInfo">  <img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> <a href="../../aboutme.html">About Me </a> | <a href="../../resume/index.html">Resume</a> | <a href="../../contactme.html">Contact Me </a>  | &copy;2004
+  Mathieu Mallet </div> 
+<br> 
+</body>
+<!-- InstanceEnd --></html>

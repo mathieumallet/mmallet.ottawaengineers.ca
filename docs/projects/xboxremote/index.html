@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/main_template.dwt" codeOutsideHTMLIsLocked="false" -->
+<!-- DW6 -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Mathieu Mallet // Xbox Remote Add-on</title>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+
+<!-- InstanceEndEditable -->
+<link href="../../mmallet.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../../favicon.ico">
+</head>
+<!-- The structure of this file is exactly the same as 2col_rightNav.html;
+     the only difference between the two is the stylesheet they use -->
+<body> 
+<div id="masthead"> 
+  <h1 id="siteName"><!-- InstanceBeginEditable name="Title" --><img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> Mathieu Mallet // Xbox Remote <!-- InstanceEndEditable --></h1>
+  <div id="globalNav"> 
+    <a href="../../index.html">Home</a> | <a href="../../aboutme.html">About Me</a> | <a href="../../knowledge.html">Knowledge</a> | <a href="../index.html">Projects</a> | <a href="../../links.html"></a><a href="../../workexperience.html">Work Experience</a> | <a href="../../resume/index.html">Resume</a> | <a href="../../links.html">Links</a> | <a href="../../contactme.html">Contact Me</a> 
+  </div> 
+</div> 
+<!-- end masthead --> 
+<!-- InstanceBeginEditable name="Body" -->
+<div id="content">
+  <h2 id="pageName">Why a Remote? </h2>
+  <div class="feature">
+    <p> The Xbox is a video game console developed by Microsoft. An add-on for that console, the DVD Playback Kit, allows a user to watch DVDs using the Xbox, using the included IR remote control to navigate the menus and control playback. However, one notable missing feature of that remote is the lack of a Power button to turn on the Xbox. This normally isn't an issue, as to watch a DVD the user needs to go to the machine and insert the disc in the console (which automatically turns it on). However, people who have modified their Xbox to run custom software (such as dedicated media software, such as the <a href="http://www.xboxmediacenter.de/">Xbox Media Centre</a>) could benefit from a power button on the remote, as the media that is played is often stored on the onboard hard drive, or on a network drive. The aim of this project is to make a modification to the Xbox console that would allow the user to power-up the console using the standard Xbox remote control. </p>
+  </div>
+  <div class="feature">    <h3><a name="planning"></a>Planning</h3>
+      <p> Since the Xbox processor does not run when the console is offline (for obvious reasons), the modification could not be software only: it would require hardware modifications. After a quick search on the web, I found <a href="http://xirremote.tripod.com/">a web site</a> that detailed the construction of a small circuit board that would receive and decode the signals from the remote and power up the Xbox when the Display button was pushed. However, the chip used in that modification, although relatively cheap, required an expensive programmer to setup. After looking at the web site of the manufacturer of that chip, I was pleased to learn that a 'Starter Kit' was available, which would provide a relatively cheap USB programmer. Unfortunately, that programmer was unable to program the chip used in the previously found design. Furthermore, since the source code was not made available on the web site, another chip could not be used. For that reason, I decided to redesign a new circuit from scratch that would use a different chip.</p>
+      <p>After some rumination, I listed the following features that I would like to implement in my design:</p>
+      <ul>
+        <li>Ability to turn on the Xbox after holding a button on the remote (e.g. 'Display', which is the top-most button on the remote)</li>
+        <li>Ability to turn off the Xbox after holding a button on the remote for more than x seconds (e.g. after holding 'Display' for 5 seconds)</li>
+        <li>Ability to hard-reboot the Xbox after holding a button on the remote for more than x seconds -- this would be independent of the software running on the Xbox and would allow the system to be restarted after the software has frozen the machine</li>
+        <li>Detachable connections on the circuit -- this would facilitate installation and testing of the modification</li>
+        <li>An indicator to show when the circuit is receiving a signal</li>
+        <li>Ability to reprogram the chip after it's been soldered on the circuit</li>
+        <li>Ability to disable the indicator and the 'hold-button-for-additionnal-functions' functionalities using dip-switches</li>
+      </ul>
+  </div>
+  <div class="feature2">
+    <h3><a name="design"></a>Design</h3>
+    <a href="images/components.jpg"><img src="images/components_small.jpg" alt="Various components: PIC12F675, TSOP34838, 2-bit dip-switch, molex connector and pin-header" width="280" height="200" border="0" class="feature2"></a>
+	<p>When the Xbox console is powered down, only the power from the standby rail is available from the power supply. However, different versions of the Xbox console exist: the first version provide 3.3V of power on standby, while more recent versions provide 5V on standby. This means that in order to be compatible with all consoles, the circuit must function using either 3.3V or 5V of power. Fortunately, the chip supplied with the <a href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&nodeId=1406&dDocName=en010053&part=DV164101"><em>PICkit 1 Flash Starter Kit</em></a> from Microchip, the <a href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&nodeId=1335&dDocName=en010114">PIC12F675</a>, had an operating voltage range of 2.0V to 5.5V. Using the chip with a voltage of 3.3V would restrict the chip clock frequency to 4MHZ, but that would be more than sufficient for the tasks at hand. Since that chip could perform all that was needed (variable input voltage, enough input/output lines, availability of a Timer, ability to be reprogrammed when installed in a circuit) it was decided to use that chip in the final design. Other features provided by the chip would later be used, such as the sleep mode and the watchdog timer.</p>
+    <p>An IR receiver was then selected. Again, that component needed to be usable at both 3.3V and 5V of supply voltage. The <a href="http://www.vishay.com/ir-receiver-modules/list/product-82202/">TSOP34838</a> from Vishay-Telefunken was selected for this.</p>
+  </div>
+  <div class="feature">    <a href="images/first_prototype.jpg"><img src="images/first_prototype_small.jpg" alt="First breadboard prototype" width="280" height="200" border="0" class="feature2"></a>
+	<p>After having ordered a few samples of the required components, I built a simple prototype on a breadboard. I used some of the then-unused pins to connect the breadboard to the programmer -- this would allow me to reprogram the chip without having to extract the chip from the breadboard and install it on the programmer each time I wanted to reprogram the chip. I also used a few resistances to bring the supply voltage down from the 5V supplied by the programmer to 3.33V for testing purposes. </p>
+	<p>The circuit created in the first prototype was quite simplistic: the IR receiver was connected to the microcontroller and would supply it with the signals. The microcontroller, in turn, was connected to a led that would be used for debugging (e.g. on = we're receiving a signal, off = we're receiving nothing). At that point, I was more concerned about developing a basic program for the microcontroller that would receive, decode and interpret the signals from the remote control. </p>
+  </div>
+  <div class="feature2">
+    <h3><a name="software"></a>Software</h3>
+    <a href="images/signals.png"><img src="images/signals_small.jpg" alt="Xbox remote IR signals" width="280" height="200" border="0" class="feature2"></a>
+	<p>Having a working prototype, I started work on the software side of the project. Although it was possible to write the software in C, I chose to write it in assembler instead: this would allow better control over the timings in the program as well as simplify access and configuration of the ports. The RISC microcontroller needed to be programmed to receive and decode the signals from the IR receiver, as well as take the necessary steps when a signal was detected. But what was it that I needed to detect? Using a <a href="http://www.lirc.org/receivers.html">home-made IR receiver</a> connected to a linux-based computer, I was able to record the signals emitted by the Xbox remote control. From this, I could see which parts of the signal represented the header, which parts represented the stop bit and, most importantly, how the data was encoded in the signal. As it can be seen from the diagram on the right, the signal is encoded in the width of the '0's, that is the width of the times when the signal is low. A short low pulse represents a 0 while a long low pulse represents a 1. For the exact timing characteristics of the signal, I used the information available in the <a href="http://lirc.sourceforge.net/remotes/microsoft/Xbox">LIRC remote database</a>. </p>
+	<p><a name="timer_problem"></a>Initially, I was going to use the Timer0 of the microcontroller to measure how long the various parts of the signal were. For instance, when I detect a transition from 0 to 1, I would clear the timer and wait for the next transition. The content of the timer would indicate how long that part of the signal was. However, this proved to be impractical as the timer could not be cleared fast enough to be of any real use. The second timing method that I tried involved a counting loop: the time to the next transition would be measured by having a loop in my program that would increment a counter when no transition was detected. Since the clock ran at a constant 4MHZ and since I knew exactly how long each instruction was, I could calculate the length of time elapsed since the last transition with little difficulty. </p>
+  </div>
+  <div class="feature">    <a href="images/second_prototype.jpg"><img src="images/second_prototype_small.jpg" alt="Second breadboard prototype" width="280" height="200" border="0" class="feature2"></a>
+	<p>Once I knew how to reliably measure the various components of the IR signal, I could begin reading the data contained in said signal. Since the signals for that particular remote are composed of 24 bits and since the memory on the PIC12F675 is 8-bit, I would need 3 bytes to store the resulting signal. That signal would then be compared to the codes obtained on the LIRC remote database: if the received code matched either the 'power-on' code or the 'reset' code, then further actions would be taken. First, the software checks if the Xbox is already on: if it isn't, the software sends a signal to power-up the xbox and waits for 5 seconds. If the Xbox was already on, then more checks are needed.</p>
+	<p>Another problem I encountered was the detection of the held-down buttons. When a button is held-down on the Xbox remote, the same signal is sent continuously. How would I detect if the button is being held down? For this I used the second timer of the microcontroller. If, within one timer loop, a correct signal is received, then that timer loop is marked as 'held' and a counter is increment. If, during the next timer loop, no signal is received or if the 'wrong' signal is received, then the counter is cleared. When the counter reaches a certain number (e.g. 10 when using a timer loop period of 0.5 seconds), the action associated with that button is taken (either power-off or reboot).</p>
+	<p>Certain features of the microcontroller allowed me to simplify the final circuit that I would make. For instance, the presence of programmable weak pull-ups on the input/output ports allowed me to do without a resistor on the dip-switches: I would simply need to place the dip-switches between the ground and the ports (with weak pull-ups active). </p>
+	<p>After those features were completed, I implemented secondary features that, while not necessary, allowed me to better understand how the microcontroller worked. First, I activated the microcontroller's watchdog timer. If, for some reason, the software were to hang up, then the watchdog would automatically reset the chip. Second, I set the chip to enter sleep mode after 5 minutes of inactivity. The power savings from this are barely enough to be mentioned, however... Finally, I reorganized the input/outputs of the chip to allow the use of in-circuit programming. This would allow me to reprogram the chip even after it has been soldered to the board. </p>
+  </div>
+  <div class="feature2">
+    <h3><a name="construction"></a>Construction</h3>
+	<a href="images/schematics.png"><img src="images/schematics_small.jpg" alt="Circuit and perforated board schematics" width="280" height="200" border="0" class="feature2"></a>
+	<p>Once both the prototype and the software were working properly, I started working on the final product. I chose to use a perforated board to mount the components on. Aiming to pack the components in as little space as possible, I drew a schematic that would tell me where to place the components and where connections would need to be placed. </p>
+	<p>As it can be seen from the perforated board schematics on the right, I decided to put two connectors on the board: one would provide power and send signals to the xbox while the other would receive data from the IR sensor and send signals to the status LED. </p>
+	<p>Construction of the cables that would interface with the Xbox and receive the IR signals proved to be harder than it should have been: I did not have the equipment required to easily setup the Molex connectors. This caused me to spend more time working on the connectors than on the actual wiring.</p>
+  </div>
+  <div class="feature">    <a href="images/power_taps.jpg"><img src="images/power_taps_small.jpg" alt="Power taps and installed circuit" width="280" height="200" border="0" class="feature2"></a>
+	<p>To power the circuit, I would be using power from the standby rail on the Xbox power supply. But how could I get access to that power? There are no free power supply connectors in the Xbox, and certainly not one that would supply standby power. I could have made a dongle that would sit between the ATX connector on the motherboard and the connector of the power supply, but that would have been too expensive and labor-intensive. I could also have attached my cables to the pins of the ATX connector, but it proved to be too difficult to secure the wires properly. The solution I used was to use wire-taps, usually used to make repairs in automobiles. The taps simply attach around the wire going from the power supply to the Xbox main board. Those taps are the red devices in the picture to the left. The circuit is wrapped in plastic to prevent short-circuits when the Xbox case is closed. </p>
+	<p>The last wire going to the remote circuit is used to send the power-up and power-down signals to the xbox. That wire had to be soldered to the front panel of the console. It would have been possible to create a solder-less solution, but this would have required setting up a dongle that would have sat between the Xbox mainboard and the Xbox front panel. As for the ATX connector, this would have been too expensive and too difficult to implement. </p>
+  </div>
+  <div class="feature2">
+	<h3><a name="problems"></a>Problems</h3>
+    <a href="images/complete_package.jpg"><img src="images/complete_package_small.jpg" alt="Finished circuit with power and input/ouput cables" width="280" height="200" border="0" class="feature2"></a>
+	<p>The first problem that I encountered during this project was the imprecision of the Timer0 of the microcontroller, as <a href="#timer_problem">previously discussed</a>.</p>
+	<p>The only problem that I encountered when creating the final circuit was due to a mistake on my initial schematics: I had inverted the power and ground supplies for the microcontroller. This, of course, prevented the circuit from working at all. Rather than restarting a new circuit on a new board, I worked around the problem by cutting the original traces on the perforated board and creating new ones.</p>
+	<p>Another problem I encountered was only revealed when I tried to make a second copy of the circuit. I had fine-tuned the timing parameters of my signal reception routines to work for only one microcontroller, assuming that all microcontrollers would be using the exact same clock frequency. What I did not know was that the internal clock on the microcontrollers, while tunable, can still differ by up to 1%. I resolved this problem by giving more lenient timing values to my software.</p>
+  </div>
+  <div class="feature2">
+	<h3><a name="conclusion"></a>Conclusion</h3>
+    <a href="images/final_result.jpg"><img src="images/final_result_small.jpg" alt="Installed modification" width="280" height="200" border="0" class="feature2"></a>
+	<p>This project was, in addition to being quite useful, very beneficial for me. It allowed me to touch RISC programming for the first time, to experiment with microcontrollers and to sharpen my skills with a soldering iron.</p>
+	<p>People who would like to build their own Xbox remote add-on are free to make use of the resources that I have placed at the end of this document. The source code  for the microcontroller is provided, though small modifications would probably be required if you decide to use a chip other than the PIC12F629/675. If you have any questions or comment, feel free to drop me an email. </p>
+  </div>
+  <div class="feature">
+    <h3><a name="additional" id="additional"></a>Additional Documents</h3>
+    <p>Various schematic files: <a href="documents/main_circuit.png">circuit</a> - <a href="documents/peripherials_connector.png">peripherals cable</a> - <a href="documents/power_connector.png">power cable</a> - <a href="documents/programming.png">programming</a> - <a href="documents/circuit-board.png">circuit board</a></p>
+    <p>Code for PIC12F629/675: <a href="documents/xir2.asm">source</a> (.asm) - <a href="documents/xir2.HEX">compiled</a> (.hex)</p>
+    <p>Required <a href="documents/required_components.txt">components</a> for the Xbox Remote Add-on </p>
+    <p>&nbsp;</p>
+  </div>
+  <div id="lastupdate">
+    Last updated on <!-- #BeginDate format:Am1 -->January 19, 2005<!-- #EndDate -->
+  </div> 
+</div>
+<!--end content -->
+<div id="navBar">
+  <div id="sectionLinks">
+    <ul>
+      <li><a href="#planning">Planning</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#software">Software</a></li>
+      <li><a href="#construction">Construction</a></li>
+      <li><a href="#problems">Problems</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+      <li><a href="#additional">Additional Documents</a></li>
+    </ul>
+  </div>
+  <div class="relatedLinks">
+    <h3>Related Links</h3>
+    <ul>
+	  <li><a href="http://www.xbox.com/en-US/hardware/dvdplaybackkit.htm">Microsoft's DVD Playback Kit </a></li>
+      <li><a href="http://www.xboxmediacenter.de/">Xbox Media Centre </a></li>
+      <li><a href="http://www.xbox-scene.com/articles/xir.php">IR Remote Power On/Off Mod </a></li>
+      <li><a href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&nodeId=1335&dDocName=en010114">Microchip's PIC12F765</a></li>
+      <li><a href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&nodeId=1406&dDocName=en010053">Microchip's PIC Starter Kit </a></li>
+      <li><a href="http://lirc.sourceforge.net/remotes/microsoft/Xbox">LIRC entry for Xbox remote</a> </li>
+    </ul>
+  </div>
+</div>
+<!-- InstanceEndEditable -->
+<!--end navbar --> 
+<div id="siteInfo">  <img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> <a href="../../aboutme.html">About Me </a> | <a href="../../resume/index.html">Resume</a> | <a href="../../contactme.html">Contact Me </a>  | &copy;2004
+  Mathieu Mallet </div> 
+<br> 
+</body>
+<!-- InstanceEnd --></html>

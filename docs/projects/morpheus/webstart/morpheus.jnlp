@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.0+"
+  codebase="http://mmallet.ottawaengineers.ca/projects/morpheus/webstart/"
+  href="morpheus.jnlp">
+  <information>
+    <title>Morpheus</title>
+    <vendor>Mathieu Mallet</vendor>
+    <homepage href="http://mmallet.ottawaengineers.ca/"/>
+    <description>Processing platform for data collected using Morpheus.</description>
+    <icon href="morpheus_64x64.gif"/>
+    <icon kind="splash" href="morpheus_splash.jpg"/> 
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.3+"/> 
+  </resources>
+  <resources os="Windows"> 
+    <jar href="morpheus.jar" main="true"/>
+    <jar href="comm/comm.jar"/>
+    <extension name="swt" href="swt/swt.jnlp"/>
+    <extension name="comm" href="comm/comm.jnlp"/>
+  </resources>
+  <resources os="Linux" arch="i386"> 
+    <jar href="morpheus.jar" main="true"/>
+    <jar href="comm/comm.jar"/>
+    <extension name="swt" href="swt/swt.jnlp"/>
+    <extension name="comm" href="comm/comm.jnlp"/>
+  </resources>
+  <application-desc/>
+</jnlp>
+

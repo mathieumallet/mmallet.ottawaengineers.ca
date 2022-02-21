@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.0+"
+  codebase="http://mmallet.ottawaengineers.ca/projects/morpheus/webstart/swt/"
+  href="swt.jnlp">
+  <information>
+    <title>SWT libraries 3.064</title>
+    <homepage href="http://www.eclipse.org/swt"/>
+    <description>SWT libraries</description>
+    <icon href="swt-webstart.gif"/>
+    <offline-allowed/>
+    <vendor>Mathieu Mallet</vendor>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources os="Windows" arch="x86">
+    <jar href="win/swt.jar"/>
+    <nativelib href="win/swt-lib.jar"/>
+  </resources>
+  <resources os="Linux" arch="i386">
+    <jar href="linux/swt.jar"/>
+    <jar href="linux/swt-pi.jar"/>
+    <nativelib href="linux/swt-lib.jar"/>
+  </resources>
+  <component-desc/>
+</jnlp>

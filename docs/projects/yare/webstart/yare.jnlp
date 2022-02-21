@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.0+"
+  codebase="http://mmallet.ottawaengineers.ca/projects/yare/webstart/"
+  href="yare.jnlp">
+  <information>
+    <title>YARE Client</title>
+    <vendor>MSW-1 4th Year Project group</vendor>
+    <homepage href="http://mmallet.ottawaengineers.ca/projects/yare/"/>
+    <description>YARE client application</description>
+    <description kind="short">YARE client application. For Windows and Linux.</description>
+    <offline-allowed/>
+  </information>
+  <nosecurity>
+      <all-permissions/>
+  </nosecurity>
+  <resources>
+    <j2se version="1.4+"/>
+    <jar href="yare.jar"/>
+    <jar href="jbcl.jar"/>
+  </resources>
+  <application-desc main-class="serialcommproj.MainGUI"/>
+</jnlp>
+

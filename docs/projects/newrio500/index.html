@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/main_template.dwt" codeOutsideHTMLIsLocked="false" -->
+<!-- DW6 -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Mathieu Mallet // NewRio500</title>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+
+<!-- InstanceEndEditable -->
+<link href="../../mmallet.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../../favicon.ico">
+</head>
+<!-- The structure of this file is exactly the same as 2col_rightNav.html;
+     the only difference between the two is the stylesheet they use -->
+<body> 
+<div id="masthead"> 
+  <h1 id="siteName"><!-- InstanceBeginEditable name="Title" --><img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> Mathieu Mallet // NewRio500 <!-- InstanceEndEditable --></h1>
+  <div id="globalNav"> 
+    <a href="../../index.html">Home</a> | <a href="../../aboutme.html">About Me</a> | <a href="../../knowledge.html">Knowledge</a> | <a href="../index.html">Projects</a> | <a href="../../links.html"></a><a href="../../workexperience.html">Work Experience</a> | <a href="../../resume/index.html">Resume</a> | <a href="../../links.html">Links</a> | <a href="../../contactme.html">Contact Me</a> 
+  </div> 
+</div> 
+<!-- end masthead --> 
+<!-- InstanceBeginEditable name="Body" -->
+<div id="content">
+  <h2 id="pageName">Why NewRio500 ? </h2>
+  <div class="feature">    <h3><a name="Overview" id="Overview"></a>Overview</h3>
+      <p> I started the NewRio500 project to familiarize myself with GTK+ development under linux while creating a program that would be useful to me. Although there already exist programs to interface with the Rio500, I wanted to create one that had exactly the features I wanted. As this project is under work, this page will be occasionally updated with progress reports.</p>
+      <h3><a name="Features"></a>Features </h3>
+      <p>Those are the features that I am aiming for with this software.</p>
+      <ul>
+        <li>GUI front-end (duh)</li>
+        <li>Drag-and-drop support </li>
+        <li>Transcoding ability -- a.k.a. on the fly conversion from, say, ogg to mp3</li>
+        <li>Backup/Restoration of Rio500 memories </li>
+      </ul>
+	  <h3><a name="Tools"></a>Tools</h3>
+	  <p>For  the development, I use the Eclipse platform with the CDT plugin. This is only for editing, however, as the project is still being compiled using gcc. For the GUI, I use the GTK+ 2.4 library. I also use the GLib 2.4 library for usual things like strings manipulation. The librio500_api library is used to provide communication to the Rio500 via USB. </p>
+	  <h3><a name="Progress"></a>Progress </h3>
+  </div>
+  <div class="feature2">
+	<a href="images/alpha01.png"><img src="images/alpha01_small.jpg" alt="Waveforms and Java Code" width="280" height="200" border="0" class="feature2"></a>
+	<p><strong>April 8, 2004</strong></p>
+	<p> First update. At the moment only the GUI has been more or less completed. I still have a few problems with the way menus are handled in GTK+ 2.4 (if two menus have the same items, how does one differentiate between them?)</p>
+	<p>librio500_api support seem to be working, though I had problems with C/C++ compability: to simplify things, I am now using C exclusively. At the moment I have the current free and total memory being queried from the Rio and being displayed as well as a few tests of the gtk treeview widget. </p>
+  </div>
+  <div class="feature">
+	<a href="images/alpha02.png"><img src="images/alpha02_small.jpg" alt="Waveforms and Java Code" width="280" height="200" border="0" class="feature2"></a>
+	<p><strong>April 28, 2004</strong></p>
+	<p>Second update. I had much problems with the librio500 library: the latest version, 0.8.1, simply refuses to compile with usbdevfs support. This is a large problem, as the kernel driver that is normally used is incompatible with the linux kernel 2.6.x (query functions, such as a query for the amount of free memory or a query for the list of files on the device worked, but transfer functions did not: this lead me to believe that the kernel driver worked when doing my initial tests). After much tinkering, I got the 0.7 version to compile and function adequately. However that version lacks features such as file transfers from the Rio to the PC, which means that I will not be able to include my backup/restore feature.</p>
+	<p>As visible on the screenshot on the left, I have got file transfers to work. A nice dialog is displayed while the files are being transferred that informs the user of the progress of the operation. Missing, however, is the estimated time remaining. Also available is the ability to format either internal or external memory.</p>
+	<p><a href="documents/NewRio500-alpha02.tar.bz2">Source code for NewRio500 Alpha02</a> (.tar.bz2 format) </p>
+  </div>  
+<div class="feature">
+	<p><strong>December 10th , 2004</strong></p>
+	<p>After a hardware failure suffered by my Rio 500 device, and the subsequent acquisition of a different model, there is little reason to continue development of this project. This project is therefore officially cancelled. </p>
+	</div>
+  <div id="lastupdate">
+    Last updated on <!-- #BeginDate format:Am1 -->January 17, 2005<!-- #EndDate -->
+  </div> 
+</div>
+<!--end content -->
+<div id="navBar">
+  <div id="sectionLinks">
+    <ul>
+      <li><a href="#Overview">Overview</a></li>
+      <li><a href="#Features">Features</a></li>
+      <li><a href="#Tools">Tools</a></li>
+      <li><a href="#Progress">Progress</a></li>
+    </ul>
+  </div>
+  <div class="relatedLinks">
+    <h3>Related Links</h3>
+    <ul>
+      <li><a href="http://www.eclipse.org/eclipse/">Eclipse Platform</a></li>
+      <li><a href="http://www.eclipse.org/cdt/">CDT Eclipse Plugin </a></li>
+      <li><a href="http://gtk.org/">GTK+/GLib</a></li>
+      <li><a href="http://rio500.sourceforge.net/">Rio500 Linux Drivers </a></li>
+    </ul>
+  </div>
+</div>
+<!-- InstanceEndEditable -->
+<!--end navbar --> 
+<div id="siteInfo">  <img src="../../images/xor-gate-small.png" alt="XOR" width="56" height="19"> <a href="../../aboutme.html">About Me </a> | <a href="../../resume/index.html">Resume</a> | <a href="../../contactme.html">Contact Me </a>  | &copy;2004
+  Mathieu Mallet </div> 
+<br> 
+</body>
+<!-- InstanceEnd --></html>

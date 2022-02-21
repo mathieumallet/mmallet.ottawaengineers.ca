@@ -1,0 +1,28 @@
+Required components for Xbox Remote Add-on:
+
+Microcontroller:
+ 1x PIC12F629 or PIC12F675 microcontroller from Microchip
+ Programmer for the selected microcontroller (The PICkit 1 Flash Starter Kit from Microchip does a good job at an affordable price)
+ Optional: 1x 8-pin chip socket
+
+IR Receiver:
+ 1x 38KHz IR Receiver module, operating at both 3.3V and 5V (I used the TSOP34838 from Vishay-Telefunken)
+
+Connectors (optional, the wires can be directly soldered on the board)
+ 2x 4-pin molex connector housing
+ 2x 4-pin right angle headers
+ Crimp terminals for molex connector (at least 20)
+ 3x low-voltage wire taps (e.g. part #64-3053 from radioshack)
+
+Misc components:
+ 1x 2-bit 1 position (4 pin) dip-switches
+ 2x 470 Ohm resistance
+ 1x 4.7 kOhm resistance
+ 1x 0.1 mF capacitor
+ 1x Rectifier diode
+ 1x LED
+ 1x perforated board 
+ Solder
+
+
+For more information, visit http://mmallet.ottawaengineers.ca/projects/xboxremote/

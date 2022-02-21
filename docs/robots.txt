@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /pub/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /protected/
+

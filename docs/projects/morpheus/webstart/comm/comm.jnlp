@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.0+"
+  codebase="http://mmallet.ottawaengineers.ca/projects/morpheus/webstart/comm/"
+  href="comm.jnlp">
+  <information>
+    <title>Communication libraries</title>
+    <homepage href="http://java.sun.com/products/javacomm/"/>
+    <description>Java serial communication libraries (javacomm) as well as code used to access it.</description>
+    <offline-allowed/>
+    <vendor>Mathieu Mallet & Sun</vendor>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <jar href="comm.jar"/>
+  <resources os="Windows" arch="x86">
+    <jar href="win/morpheus_comm.jar"/>
+    <nativelib href="win/comm-lib.jar"/>
+  </resources>
+  <resources os="Linux" arch="i386">
+    <jar href="linux/morpheus_comm.jar"/>
+  </resources>
+  <component-desc/>
+</jnlp>

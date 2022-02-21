@@ -1,0 +1,10 @@
+AuthUserFile /home/rottawae/public_html/mmallet/projects/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Restricted access"
+AuthType Basic
+
+<Limit GET POST>
+require user library
+</Limit>
+
+
